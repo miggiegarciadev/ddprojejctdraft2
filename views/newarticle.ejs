@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blog</title>
+</head>
+
+<body>
+
+  <nav class="site-navBar">
+    <ul class="ulofnavbar" id="green">
+    <li><a href="/index" class="button primary">Home</a></li>
+    <li><a href="/emergency" class="button primary">Emergency</a></li>
+    <li><a href="/#first" class="button primary">Mission</a></li>
+    <li><a href="/blogposting" class="button primary">Make a post</a></li>
+    <li><a href="/blog" class="button primary">Blog</a></li>
+    <li><a href="/resources" class="button primary">Resources</a></li>
+    </ul>
+  </nav> 
+
+  <div class="container">
+    <h1 class="mb-4">New Article</h1>
+
+    <% if (user.local.email) { %>
+
+    <form action="/newarticle" method="POST">
+      <div>
+        <label for="username">User Email:</label>
+        <input type="text" value="<%= user.local.email %>" name="name">
+        <br>
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" class="form-control" required>
+      </div>
+
+      <p></p>
+
+      <div>
+        <label for="title"> Date </label>
+        <input type="text" name="date" id="title" class="form-control" required>
+      </div>
+
+      <p></p>
+
+      <div>
+        <label for="title"> Quick Caption or Hashtags</label>
+        <input type="text" name="description" id="title" class="form-control" required>
+      </div>
+
+      <div>
+        <label for="title"> Blog Post </label>
+        <textarea name="blogpost" id="blogpost" cols="30" rows="10" class="form-control"></textarea required></text>
+      </div>
+
+
+  <button type="submit">Save</button>
+    </form>
+
+    <a href="/blogposting" class="btn btn-secondary">Cancel</a>
+  </div>
+
+  <% } %>
+
+
+</body>
+
+</html>
+
+<!-- web dev simplied on youtube via github -->

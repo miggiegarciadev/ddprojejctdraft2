@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- web dev simplied on youtube via github -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Make new Post</title>
+</head>
+<body>
+  hello ////
+  <nav class="site-navBar">
+    <ul class="ulofnavbar" id="green">
+    <li><a href="/index" class="button primary">Home</a></li>
+    <li><a href="/emergency" class="button primary">Emergency</a></li>
+    <li><a href="/#first" class="button primary">Mission</a></li>
+    <li><a href="/blogposting" class="button primary">Make a post</a></li>
+    <li><a href="/blog" class="button primary">Blog</a></li>
+    <li><a href="/resources" class="button primary">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1 class="mb-4">Your Blog Articles</h1>
+    <a href="/newarticle" class="btn btn-success">New Article</a>
+
+    <!-- worked with Trek Mentor fto further understand how this connects back to the DB-->
+  <!-- each article posted -->
+    <% article.forEach(newarticle => { %>
+      <!-- this connects to the db on mongo, make sure that the collection key value pairs match up to the js variables -->
+      <div class="card mt-4">
+
+        <!-- first blog post -->
+        <div class="card-body">
+          <h4 class="card-title"><%= newarticle.title %></h4>
+          <div class="card-subtitle text-muted mb-2">
+            <%= newarticle.createdAt %>
+          </div>
+          <div class="card-text mb-2"><%= newarticle.description %></div>
+
+          <a href="newarticles/<%= newarticle.slug %>" class="btn btn-primary">Read More</a>
+
+          <a href="newarticle/edit/<%= newarticle.id %>" class="btn btn-info">Edit</a>
+
+          <form action="/blogposting/<%= newarticle._id %>" method="DELETE" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+
+  </div>
+
+
+</body>
+</html>
