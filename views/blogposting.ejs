@@ -25,7 +25,7 @@
     <h1 class="mb-4">Your Blog Articles</h1>
     <a href="/newarticle" class="btn btn-success">New Article</a>
 
-    <!-- worked with Trek Mentor fto further understand how this connects back to the DB-->
+    <!-- worked with Trek Mentor to further understand how this connects back to the DB-->
   <!-- each article posted -->
     <% article.forEach(newarticle => { %>
       <!-- this connects to the db on mongo, make sure that the collection key value pairs match up to the js variables -->
@@ -39,7 +39,7 @@
           </div>
           <div class="card-text mb-2"><%= newarticle.description %></div>
 
-          <a href="newarticles/<%= newarticle.slug %>" class="btn btn-primary">Read More</a>
+          <a href="/blogposting/<%= newarticle._id %>" method="GET" class="btn btn-primary">Read More</a>
 
           <a href="newarticle/edit/<%= newarticle.id %>" class="btn btn-info">Edit</a>
 
