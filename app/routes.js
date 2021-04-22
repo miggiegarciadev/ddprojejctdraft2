@@ -55,8 +55,8 @@ var ObjectId = require('mongodb').ObjectID;
   })
 });
 
- // MAKE A POST=========================
 
+ // MAKE A POST=========================
  //show me all the post user made
  app.get('/blogposting', isLoggedIn, function(req, res) {
   //  think of it as issuing a database query
@@ -73,22 +73,21 @@ var ObjectId = require('mongodb').ObjectID;
 });
 
 // POSTING A BLOG > NEW ARTICLE  ===================
-app.get('/newarticle', isLoggedIn, function(req, res) {
-  db.collection('newarticle').find().toArray((err, result) => {
-    // it is going into the DB to find this info in the function below
+//for the user to make a new blog post
+ app.get('/newarticle', isLoggedIn, function(req, res) {
+   db.collection('newarticle').find().toArray((err, result) => {
+     // it is going into the DB to find this info in the function below
     if (err) return console.log(err)
 
-    res.render('newarticle.ejs', {
-      user : req.user,
+     res.render('newarticle.ejs', {
+       user : req.user,
       title: String,
-      createdAt: new Date(),
-      description: String,
-      bpost: String,
-    })
-  })
-});
-
-
+       createdAt: new Date(),
+       description: String,
+       bpost: String,
+     })
+   })
+ });
 
 
 // POSTING A BLOG > NEW ARTICLE  ===================
@@ -108,6 +107,7 @@ app.post('/newarticle', (req, res) => {
 })
 
 // POSTING A BLOG > DELETE BUTTON ===================
+//this get route gives functionality to the delete button to work but as a get with a METHOD of delete :-(
 //received help from mentor Michael Kazin
 app.get('/blogposting/:id',  (req, res) => {
   db.collection('newarticle').findOneAndDelete({
@@ -118,21 +118,52 @@ app.get('/blogposting/:id',  (req, res) => {
     res.redirect('/blogposting')
   })
 })
-//this get route gives functionality to the delete button to work
 
-// READ MORE BUTTON  ===================
-//received help from Maria Christina (Alum)
-app.get('/blogposting/:id',  (req, res) => {
-  db.collection('newarticle').findOne({
-    _id: ObjectId(req.params.id),
+
+// // POSTING A BLOG > READ MORE 'BUTTON' ===================
+// app.get('/blogpersonal', isLoggedIn, function(req, res) {
+//   db.collection('newarticle').find().toArray((err, result) => {
+//     // it is going into the DB to find this info in the function below
+//     if (err) return console.log(err, 'this dont work')
+//     res.render('blogpersonal.ejs', {
+//       user : req.user,
+//       title: String,
+//       createdAt: new Date(),
+//       description: String,
+//       bpost: String,
+//     })
+//   })
+// });
+
+//  blogposting.ejs,  READMORE BUTTON > BLOGPERSONAL.EJS ===============
+app.post('/blogpersonal', (req, res) => {
+  db.collection('newarticle').save({
+    user : req.user,
+    title: req.body.title,
+    createdAt: new Date(),
+    description: req.body.description,
+    bpost: req.body.blogpost,
   }, (err, result) => {
-    console.log(result)
-    console.log(req.params.id)
-    if (err) return res.send(500, err)
-    res.redirect('/blogposting')
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/blogpersonal')
   })
 })
-//this gives the fucntionalitty to read more
+
+// BLOGPEERSONAL.ejs (viewing the individual blog post from readmore button)
+app.get('/blogpersonal/:zebra', isLoggedIn, function(req, res) {
+  let post= ObjectId(req.params.zebra)
+ //  think of it as issuing a database query
+ db.collection('newarticle').find({_id:post}).toArray((err, result) => {
+   if (err) return console.log(err)
+   console.log(result, 'what can i fix')
+   res.render('blogpersonal.ejs', {
+    unicorn: result,
+    user: req.user
+     // what information do you want to get from the DB to display on your browser?
+   })
+ })
+});
 
 
 

@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-<h1>hello world...</h1>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <h1>hello world...</h1>
+
+<div class="newReadMorePost">
+
+  <!-- i want to be able to see that specific article here  -->
+
+
+  <% if (user.local.email) { %>
+    <!-- this connects to the db on mongo, make sure that the collection key value pairs match up to the js variables -->
+    <div class="card mt-4">
+
+      <!-- first blog post -->
+      <div class="card-body">
+        <h4 class="card-title"><%= unicorn[0].title %></h4>
+        <div class="card-subtitle text-muted mb-2">
+          <%= unicorn[0].createdAt %>
+        </div>
+        <div class="card-text mb-2"><%= unicorn[0].description %></div>
+
+        <div class="card-text mb-2"><%= unicorn[0].bpost %></div>
+
+
+
+          <!-- <a href="newarticle/edit" class="btn btn-info">Edit</a> -->
+    </div>
+  <% } %>
+
+</div>
+
+
+</body>
+
+
+
 </html>

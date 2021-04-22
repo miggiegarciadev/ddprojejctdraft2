@@ -9,7 +9,7 @@
   <title>Make new Post</title>
 </head>
 <body>
-  hello ////
+<h1>blog posting page</h1>
   <nav class="site-navBar">
     <ul class="ulofnavbar" id="green">
     <li><a href="/index" class="button primary">Home</a></li>
@@ -39,9 +39,9 @@
           </div>
           <div class="card-text mb-2"><%= newarticle.description %></div>
 
-          <a href="/blogposting/<%= newarticle._id %>" method="GET" class="btn btn-primary">Read More</a>
+            <a href="/blogpersonal/<%= newarticle._id %>" class="btn btn-primary">Read More</a>
 
-          <a href="newarticle/edit/<%= newarticle.id %>" class="btn btn-info">Edit</a>
+          <a href="newarticle/edit/<%= newarticle._id %>" class="btn btn-info">Edit</a>
 
           <form action="/blogposting/<%= newarticle._id %>" method="DELETE" class="d-inline">
             <button type="submit" class="btn btn-danger">Delete</button>
